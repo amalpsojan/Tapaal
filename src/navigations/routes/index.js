@@ -1,0 +1,15 @@
+const Routes = {
+  MAIN_APP: 'MAIN_APP',
+
+  /*STACK*/
+  AUTH_STACK: 'AUTH_STACK',
+  HOME_STACK: 'HOME_STACK',
+
+  /*SCREENS*/
+  SPLASH: 'SPLASH_SCREEN',
+  SIGNIN: 'SIGNIN_SCREEN',
+  SIGNUP: 'SIGNUP_SCREEN',
+  HOME: 'HOME_SCREEN',
+};
+
+export default Routes;

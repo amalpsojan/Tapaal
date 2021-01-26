@@ -1,6 +1,13 @@
 import React from 'react';
-import {Header} from '_atoms';
+import {Header, House} from '_components/';
 
-const App = () => <Header />;
+const App = () => {
+  return (
+    <>
+      <Header name={'Amal P Sojan'} />
+      <House name={'Palayoor'} />
+    </>
+  );
+};
 
 export default App;

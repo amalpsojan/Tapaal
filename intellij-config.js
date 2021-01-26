@@ -2,12 +2,13 @@
 System.config({
   paths: {
     '_assets/*': './src/assets/*',
-    '_component/*': './src/components/*',
-    _atoms: './src/components/atoms/*',
+    '_components/*': './src/components/*',
+    '_constants/*': './src/constants/*',
     '_i18n/*': './src/i18n/*',
     '_navigations/*': './src/navigations/*',
-    '_scenes/*': './src/scenes/*',
+    '_screens/*': './src/screens/*',
     '_services/*': './src/services/*',
+    '_store/*': './src/store/*',
     '_styles/*': './src/styles/*',
     '_utils/*': './src/utils/*',
   },

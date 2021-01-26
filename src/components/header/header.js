@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-const Header = () => <Text>Hello World Amal</Text>;
+const Header = ({name}) => <Text>Hello World {name}</Text>;
 
 export default Header;
