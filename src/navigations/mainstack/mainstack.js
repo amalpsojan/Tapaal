@@ -1,18 +1,14 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Home} from '_screens/';
-import Routes from '../Routes';
+import {Home} from '@screens/';
+import Routes from '../routes';
 
 const Stack = createStackNavigator();
 
 export default (props) => {
   return (
-    <Stack.Navigator headerMode="screen">
-      <Stack.Screen
-        name={Routes.HOME}
-        // options={{headerShown: false}}
-        component={Home}
-      />
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name={Routes.HOME_SCREEN} component={Home} />
     </Stack.Navigator>
   );
 };

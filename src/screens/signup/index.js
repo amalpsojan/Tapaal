@@ -1,14 +1,22 @@
 import React from 'react';
 import {SafeAreaView, Text, TouchableHighlight} from 'react-native';
+import NavigationService from '@navigations/index';
+import Routes from '@navigations/routes';
 
-const LoginScreen = ({navigation}) => (
-  <SafeAreaView>
-    <Text>Screen: SignUp</Text>
+const LoginScreen = () => {
+  const onSignIn = () => {
+    NavigationService.navigate(Routes.SIGNIN_SCREEN);
+  };
 
-    <TouchableHighlight onPress={() => navigation.navigate('Home')}>
-      <Text>Go to home</Text>
-    </TouchableHighlight>
-  </SafeAreaView>
-);
+  return (
+    <SafeAreaView>
+      <Text>Screen: SignUp</Text>
+
+      <TouchableHighlight onPress={onSignIn}>
+        <Text>Go to SignIn</Text>
+      </TouchableHighlight>
+    </SafeAreaView>
+  );
+};
 
 export default LoginScreen;

@@ -1,15 +1,16 @@
 // eslint-disable-next-line no-undef
 System.config({
   paths: {
-    '_assets/*': './src/assets/*',
-    '_components/*': './src/components/*',
-    '_constants/*': './src/constants/*',
-    '_i18n/*': './src/i18n/*',
-    '_navigations/*': './src/navigations/*',
-    '_screens/*': './src/screens/*',
-    '_services/*': './src/services/*',
-    '_store/*': './src/store/*',
-    '_styles/*': './src/styles/*',
-    '_utils/*': './src/utils/*',
+    '@assets/*': './src/assets/*',
+    '@components/*': './src/components/*',
+    '@config/*': './src/config/*',
+    '@constants/*': './src/constants/*',
+    '@i18n/*': './src/i18n/*',
+    '@navigations/*': './src/navigations/*',
+    '@screens/*': './src/screens/*',
+    '@services/*': './src/services/*',
+    '@store/*': './src/store/*',
+    '@styles/*': './src/styles/*',
+    '@utils/*': './src/utils/*',
   },
 });

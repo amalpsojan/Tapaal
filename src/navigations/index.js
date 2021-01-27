@@ -1,5 +1,5 @@
 import React from 'react';
-export {Routes} from './Routes';
+export Routes from './routes';
 
 export const navigationRef = React.createRef();
 export const isMountedRef = React.createRef();
@@ -11,7 +11,13 @@ export const isMountedRef = React.createRef();
  * @param params Route parameters.
  */
 function navigate(routeName, params) {
-  console.log('LOG_navigate', routeName, params);
+  console.log(
+    '\nLOG_navigate ',
+    '\nScreen Name: ',
+    routeName,
+    '\nParams: ',
+    params ? params : 'No Params',
+  );
   if (isMountedRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.navigate(routeName, params);

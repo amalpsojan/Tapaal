@@ -1,11 +1,9 @@
-import * as React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useCallback, useContext} from 'react';
-
-import {APP_STATE} from '@constants/';
-import {useStoreActions, useStoreState} from 'easy-peasy';
+import React, {useEffect, useCallback, useContext} from 'react';
 import {Alert} from 'react-native';
-import {resetLoginCredentials} from '@services/key-chain';
+import {APP_STATE} from '@constants/';
+import {resetLoginCredentials} from '../key-chain';
+import {useStoreActions, useStoreState} from 'easy-peasy';
+// import useCheckVersion from '../check-version';
 
 const AppStateContext = React.createContext();
 
@@ -19,12 +17,8 @@ export const AppContextProvider = (props) => {
     setState: actions.login.changeAppState,
     checkLogin: actions.login.checkLogin,
   }));
-
-  const appState = useStoreState((store) => store.login.appstate);
-
-  React.useEffect(() => {
-    checkLogin();
-  }, []);
+  // useCheckVersion();
+  const state = useStoreState((store) => store.login.appstate);
 
   const _logoutUser = useCallback(async () => {
     const reset = resetLoginCredentials();
@@ -58,8 +52,18 @@ export const AppContextProvider = (props) => {
     [loginUser],
   );
 
+  // check loggedin on mount
+  useEffect(() => {
+    state === APP_STATE.UNKNOWN && checkLogin();
+  }, [checkLogin, state]);
+
   return (
-    <AppStateContext.Provider value={{appState, login, logout}}>
+    <AppStateContext.Provider
+      value={{
+        state,
+        logout,
+        login,
+      }}>
       {props.children}
     </AppStateContext.Provider>
   );

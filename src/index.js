@@ -1,11 +1,13 @@
 import React from 'react';
-import {Header, House} from '_components/';
+import Root from './app';
+// import {House, Header} from '_components/';
 
 const App = () => {
   return (
     <>
-      <Header name={'Amal P Sojan'} />
-      <House name={'Palayoor'} />
+      {/*<Header name={'Amal P Sojan'} />*/}
+      {/*<House name={'Palayoor'} />*/}
+      <Root />
     </>
   );
 };

@@ -1,14 +1,58 @@
 import React from 'react';
-import {SafeAreaView, Text, TouchableHighlight} from 'react-native';
+import {Button, Keyboard, SafeAreaView, TextInput, View} from 'react-native';
+import useAuth from '@services/auth';
+import NavigationService from '@navigations/index';
+import Routes from '@navigations/routes';
 
-const LoginScreen = ({navigation}) => (
-  <SafeAreaView>
-    <Text>Screen: SignIn</Text>
+const SignInScreen = () => {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const {login} = useAuth();
 
-    <TouchableHighlight onPress={() => navigation.navigate('Home')}>
-      <Text>Go to home</Text>
-    </TouchableHighlight>
-  </SafeAreaView>
-);
+  const loginUser = () => {
+    Keyboard.dismiss();
 
-export default LoginScreen;
+    if (!username || !password) {
+      // showInfoToast('Username and password are mandatory, try again !');
+    }
+
+    login({
+      username,
+      password,
+    });
+  };
+
+  const onSignUp = () => {
+    NavigationService.navigate(Routes.SIGNUP_SCREEN);
+  };
+
+  return (
+    <SafeAreaView>
+      <View>
+        <TextInput
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <Button
+          title="Sign in"
+          // onPress={() => authContext.signIn({username, password})}
+          onPress={loginUser}
+        />
+        <Button
+          title="Sign Up"
+          // onPress={() => authContext.signIn({username, password})}
+          onPress={onSignUp}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default SignInScreen;

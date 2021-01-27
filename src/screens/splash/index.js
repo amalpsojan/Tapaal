@@ -1,10 +1,12 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 
-const LoginScreen = ({navigation}) => (
+const SplashScreen = ({navigation}) => (
   <SafeAreaView>
-    <Text>Screen: Splash</Text>
+    <View>
+      <Text>Loading...</Text>
+    </View>
   </SafeAreaView>
 );
 
-export default LoginScreen;
+export default SplashScreen;

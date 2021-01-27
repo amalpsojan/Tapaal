@@ -22,9 +22,11 @@ export const LINE_HEIGHT_16 = scaleFont(16);
 export const FONT_REGULAR = {
   fontFamily: FONT_FAMILY_REGULAR,
   fontWeight: FONT_WEIGHT_REGULAR,
+  fontSize: FONT_SIZE_14,
 };
 
 export const FONT_BOLD = {
   fontFamily: FONT_FAMILY_BOLD,
   fontWeight: FONT_WEIGHT_BOLD,
+  fontSize: FONT_SIZE_14,
 };

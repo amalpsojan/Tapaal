@@ -2,16 +2,15 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {navigationRef, isMountedRef} from './index';
-
-import Routes from './Routes';
-
 // Screens Objects
-import AuthStack from './authstack';
-import MainStack from './mainstack';
-import {useAppContext} from '_services/auth/app-context';
-import {APP_STATE} from '_constants/';
-import {Splash} from '_screens/';
+
+import {useAppContext} from '@services/auth/app-context';
+import {Splash} from '@screens/';
+import {APP_STATE} from '@constants/index';
+import {isMountedRef, navigationRef} from '@navigations/index';
+import Routes from '@navigations/routes';
+import Main from '@navigations/mainstack';
+import Auth from '@navigations/authstack';
 
 const Stack = createStackNavigator();
 
@@ -21,17 +20,17 @@ const RootNavigation = (props) => {
     return () => (isMountedRef.current = false);
   }, []);
 
-  const {state} = useAppContext();
+  const {appState} = useAppContext();
 
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator headerMode="none">
-        {state === APP_STATE.USER ? (
-          <Stack.Screen name={Routes.MAIN_APP} component={MainStack} />
-        ) : state === APP_STATE.GUEST ? (
-          <Stack.Screen name={Routes.AUTH_STACK} component={AuthStack} />
+        {appState === APP_STATE.USER ? (
+          <Stack.Screen name={Routes.MAIN_APP} component={Main} />
+        ) : appState === APP_STATE.GUEST ? (
+          <Stack.Screen name={Routes.AUTH_STACK} component={Auth} />
         ) : (
-          <Stack.Screen name={Routes.SPLASH} component={Splash} />
+          <Stack.Screen name={Routes.SPLASH_SCREEN} component={Splash} />
         )}
       </Stack.Navigator>
     </NavigationContainer>

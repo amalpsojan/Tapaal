@@ -1,10 +1,22 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {Button, SafeAreaView, Text, View} from 'react-native';
+import useAuth from '@services/auth';
 
-const LoginScreen = ({navigation}) => (
-  <SafeAreaView>
-    <Text>Screen: Home</Text>
-  </SafeAreaView>
-);
+const HomeScreen = ({navigation}) => {
+  const {logout} = useAuth();
 
-export default LoginScreen;
+  const logoutUser = () => {
+    logout();
+  };
+
+  return (
+    <SafeAreaView>
+      <View>
+        <Text>Signed in!</Text>
+        <Button title="Sign out" onPress={logoutUser} />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default HomeScreen;

@@ -1,4 +1,5 @@
 // @flow
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import * as Keychain from 'react-native-keychain';
 
@@ -29,8 +30,7 @@ export const getLoginCredentials = async () => {
 
 export const resetLoginCredentials = async () => {
   try {
-    const reset = await Keychain.resetGenericPassword();
-    return reset;
+    return await Keychain.resetGenericPassword();
   } catch (e) {
     console.log('cannot access or reset keychain data ', e);
     return false;
