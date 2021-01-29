@@ -9,8 +9,8 @@ const createStore = () => {
   console.log('LOG_createstore ok');
 
   apiClient = Api.createApiClient();
-  store = ConfigureStore(model, apiClient);
-  // store = ConfigureStore(model);
+  // store = ConfigureStore(model, apiClient);
+  store = ConfigureStore(model);
   return store;
 };
 
