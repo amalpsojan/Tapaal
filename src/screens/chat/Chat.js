@@ -9,108 +9,6 @@ const ChatScreen = ({navigation}) => {
     useEffect(() => {
         setMessages([
             {
-                _id: 12,
-                text: 'image message',
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 31, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },{
-                _id: 11,
-                text: 'image message',
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 30, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },{
-                _id: 10,
-                text: 'image message',
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 29, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },{
-                _id: 9,
-                text: 'image message',
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 28, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },{
-                _id: 8,
-                text: 'image message',
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 27, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },{
-                _id: 7,
-                text: 'image message',
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 26, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },{
                 _id: 6,
                 text: 'image message',
                 createdAt: new Date(Date.UTC(2021, 0, 28, 21, 25, 21)),
@@ -221,10 +119,18 @@ const ChatScreen = ({navigation}) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, message));
     }, []);
 
+    const onSendImage = useCallback((message = []) => {
+        console.log('Image message :', JSON.stringify(message, 0, 50));
+
+        setMessages(previousMessages => GiftedChat.append(previousMessages, message));
+    }, []);
+
+
     return (
         <TapaalChat
             messages={messages}
             onSend={message => onSend(message)}
+            onSendImage={message => onSendImage(message)}
             user={{
                 _id: 1,
                 name:"Amal",
