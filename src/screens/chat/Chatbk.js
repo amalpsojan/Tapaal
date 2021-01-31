@@ -1,46 +1,13 @@
-import React, {Component, useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {TapaalChat} from '@components/';
 
-class ChatScreen extends Component {
+const ChatScreen = ({navigation}) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            messages: [],
-        };
-        this.giftedChatRef = React.createRef();
-    }
+    const [messages, setMessages] = useState([]);
 
-    componentDidMount() {
-        this.fetchMessages();
-    }
-
-    fetchMessages = () => {
-        console.log('fetchMessages');
-        const messages = [
-            {
-                _id: 7,
-                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 25, 21)),
-                user: {
-                    _id: 3,
-                    name: 'React Native Developer',
-                    avatar: 'https://placeimg.com/150/150/any',
-                },
-                image: 'https://placeimg.com/200/200/any',
-                styles:{
-                    bubble:{
-                        backgroundColor:'transparent'
-                    }
-                },
-                // Mark the message as sent, using one tick
-                sent: true,
-                // Mark the message as received, using two tick
-                received: true,
-                // Mark the message as pending with a clock loader
-                pending: true,
-                // Any additional custom parameters are passed through
-            },
+    useEffect(() => {
+        setMessages([
             {
                 _id: 6,
                 text: 'image message',
@@ -143,48 +110,40 @@ class ChatScreen extends Component {
                 // Mark the message as pending with a clock loader
                 pending: true,
                 // Any additional custom parameters are passed through
-            },
-        ];
-        this.setState({messages});
-    };
+            }
+        ]);
+    }, []);
 
-
-    onSend = (message = []) => {
+    const onSend = useCallback((message = []) => {
         console.log('messages :', JSON.stringify(message, 0, 50));
-        const messages = GiftedChat.append(this.state.messages, message);
-        this.setState((prev) => ({...prev.messages, messages}));
-        this.giftedChatRef.current.scrollToBottom();
-    };
+        setMessages(previousMessages => GiftedChat.append(previousMessages, message));
+    }, []);
 
-    onSendAudio = (message = []) => {
+    const onSendAudio = useCallback((message = []) => {
         console.log('Audio messages :', JSON.stringify(message, 0, 50));
-    };
+    }, []);
 
-    onSendImage = (message = []) => {
+    const onSendImage = useCallback((message = []) => {
         console.log('Image message :', JSON.stringify(message, 0, 50));
 
-        // setMessages(previousMessages => GiftedChat.append(previousMessages, message));
-    };
+        setMessages(previousMessages => GiftedChat.append(previousMessages, message));
+    }, []);
 
-    render() {
-        return (
-            <TapaalChat
-                innerRef={this.giftedChatRef}
-                backgroundColor={'#080b10'}
-                senderBubbleBgColor={"green"}
-                receiverBubbleBgColor={"white"}
-                messages={this.state.messages}
-                onSend={message => this.onSend(message)}
-                onSendAudio={message => this.onSendAudio(message)}
-                onSendImage={message => this.onSend(message)}
-                user={{
-                    _id: 1,
-                    name: 'Amal',
-                    avatar: 'https://placeimg.com/160/160/any',
-                }}
-            />
-        );
-    }
-}
+
+    return (
+        <TapaalChat
+            backgroundColor={'#080b10'}
+            messages={messages}
+            onSend={message => onSend(message)}
+            onSendAudio={message => onSendAudio(message)}
+            onSendImage={message => onSendImage(message)}
+            user={{
+                _id: 1,
+                name:"Amal",
+                avatar: 'https://placeimg.com/160/160/any',
+            }}
+        />
+    );
+};
 
 export {ChatScreen};

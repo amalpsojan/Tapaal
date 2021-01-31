@@ -3,12 +3,13 @@ import React from 'react';
 import {Chat} from '@screens/';
 
 const App = () => {
-  return (
-    <>
-        <Chat/>
-      {/*<Root />*/}
-    </>
-  );
+    return (
+        <>
+            <Chat/>
+            {/*<Root />*/}
+        </>
+    );
 };
+
 
 export default App;
