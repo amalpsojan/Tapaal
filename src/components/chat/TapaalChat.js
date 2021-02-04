@@ -215,10 +215,10 @@ const RenderSend = (props) => {
             <Send
                 {...props}
                 disabled={false}
-                containerStyle={[styles.iconContainer.send,{backgroundColor:props.sendIconConatinerColor}]}
+                containerStyle={[styles.iconContainer.send,{backgroundColor:props.sendIconContainerColor}]}
             >
                 <IonIcon style={styles.icon.send} name={'send'} size={20}
-                         color={props.iconColor}/>
+                         color={props.sendIconColor}/>
             </Send>
         );
     }
@@ -230,11 +230,11 @@ const RenderSend = (props) => {
             testID='audioSend'
             accessibilityLabel='audioSend'
             accessible
-            style={[styles.iconContainer.record,{backgroundColor:props.sendIconConatinerColor}]}
+            style={[styles.iconContainer.record,{backgroundColor:props.sendIconContainerColor}]}
         >
             <View>
                 <IonIcon style={styles.icon.record} name={'ios-mic'} size={26}
-                         color={props.iconColor}/>
+                         color={props.sendIconColor}/>
             </View>
         </TouchableOpacity>
     );
@@ -254,7 +254,7 @@ const renderInputToolbar = (props) => {
     );
 };
 
-export const TapaalChat = ({innerRef, backgroundColor, user, onSendImage, ...props}: Object): ReactElement<RNGiftedChat> => {
+export const TapaalChat = ({containerStyle,innerRef, backgroundColor, user, onSendImage, ...props}: Object): ReactElement<RNGiftedChat> => {
 
     type OnImageChangeCallback = (event: { nativeEvent: { uri: string, linkUri: string } }) => void;
 
@@ -296,7 +296,7 @@ export const TapaalChat = ({innerRef, backgroundColor, user, onSendImage, ...pro
     };
 
     return (
-        <View style={[styles.container,{backgroundColor}]}>
+        <View style={[styles.container,{backgroundColor},containerStyle]}>
             <RNGiftedChat
                 ref={innerRef}
                 alwaysShowSend
@@ -318,8 +318,9 @@ TapaalChat.defaultProps = {
     backgroundColor:'#080b10',
     senderBubbleBgColor:'green',
     receiverBubbleBgColor:'white',
+    sendIconColor:'white',
     iconColor:'white',
-    sendIconConatinerColor:'#00b19b',
+    sendIconContainerColor:'#00b19b',
     textColor:'white',
     inputBackgroundColor:'#2d383e'
 };

@@ -10,6 +10,7 @@ const Routes = {
   SIGNIN_SCREEN: 'SIGNIN_SCREEN',
   SIGNUP_SCREEN: 'SIGNUP_SCREEN',
   HOME_SCREEN: 'HOME_SCREEN',
+  CHAT_SCREEN: 'CHAT_SCREEN',
 };
 
 export default Routes;

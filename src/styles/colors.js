@@ -1,14 +1,64 @@
-export const PRIMARY = '#1779ba';
-export const SECONDARY = '#767676';
-export const WHITE = '#FFFFFF';
-export const BLACK = '#000000';
+const BASE_COLORS = {
+    white: '#ffffff',
+    black: '#000000',
+    green: '#00ff62',
+    red: '#ff2100',
+    yellow: '#fffb00',
 
-// ACTIONS
-export const SUCCESS = '#3adb76';
-export const WARNING = '#ffae00';
-export const ALERT = '#cc4b37';
+    // GRAYSCALE
+    grayLight: '#e6e6e6',
+    grayMedium: '#cacaca',
+    grayDark: '#8a8a8a',
 
-// GRAYSCALE
-export const GRAY_LIGHT = '#e6e6e6';
-export const GRAY_MEDIUM = '#cacaca';
-export const GRAY_DARK = '#8a8a8a';
+    // ACTIONS
+    success: '#3adb76',
+    warning: '#ffae00',
+    alert: '#cc4b37',
+    error: '#ff0000',
+
+};
+
+export const themes = {
+    LIGHT_MODE:{
+        primary: '#075e55',
+        secondary: '#767676',
+
+        primaryText: '#ffffff',
+
+        background: '#080b10',
+        inputBackground: '#ffffff',
+
+        icon: '#878c8f',
+
+        //Chat
+        sendIcon:'#ffffff',
+        sendIconContainer:'#00b19b',
+        senderBubbleBackground:'green',
+        receiverBubbleBackground:'white',
+        ...BASE_COLORS,
+    },
+    DARK_MODE: {
+        primary: '#075e55',
+        secondary: '#767676',
+
+        primaryText: '#ffffff',
+
+        background: '#080b10',
+        inputBackground: '#2d383e',
+
+        icon: '#ffffff',
+        statusBarColor:'#054c44',
+
+        //Chat
+        sendIcon:'#ffffff',
+        sendIconContainer:'#00b19b',
+        senderBubbleBackground:'green',
+        receiverBubbleBackground:'white',
+        ...BASE_COLORS,
+    }
+};
+
+const Colors = themes.DARK_MODE;
+// const Colors = themes['DARK_MODE'];
+
+export default Colors;

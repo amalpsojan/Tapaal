@@ -1,22 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Button, SafeAreaView, Text, View} from 'react-native';
-import useAuth from '@services/auth';
+import NavigationService, {isMountedRef} from '@navigations/index';
+import Routes from '@navigations/routes';
 
-const HomeScreen = ({navigation}) => {
-  const {logout} = useAuth();
+class HomeScreen extends Component {
 
-  const logoutUser = () => {
-    logout();
+  constructor(props) {
+    super(props);
+    isMountedRef.current = true;
+  }
+
+  componentDidMount() {
+
+  }
+
+  logoutUser = () => {
+
   };
 
-  return (
-    <SafeAreaView>
-      <View>
-        <Text>Signed in!</Text>
-        <Button title="Sign out" onPress={logoutUser} />
-      </View>
-    </SafeAreaView>
-  );
-};
+  chat = () => {
+    NavigationService.navigate(Routes.CHAT_SCREEN);
+  };
+
+  render() {
+    return (
+        <SafeAreaView>
+          <View>
+            <Text>Signed in!</Text>
+            <Button title="Chat" onPress={this.chat} />
+            <Button title="Sign out" onPress={this.logoutUser} />
+          </View>
+        </SafeAreaView>
+    );
+  }
+}
 
 export {HomeScreen};

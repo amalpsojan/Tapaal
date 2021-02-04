@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {StatusBar} from 'react-native';
 import {GiftedChat} from 'react-native-gifted-chat';
-import {TapaalChat} from '@components/';
+import {TapaalChat,Header} from '@components/';
+import Colors from '@styles/colors';
 
 class ChatScreen extends Component {
 
@@ -35,7 +37,7 @@ class ChatScreen extends Component {
                 // Mark the message as pending with a clock loader
                 pending: true,
                 // Any additional custom parameters are passed through
-            },{
+            }, {
                 _id: 8,
                 text: 'internal storageimage message gvtryd5rd54ws43w',
                 createdAt: new Date(Date.UTC(2021, 0, 28, 21, 25, 21)),
@@ -62,10 +64,10 @@ class ChatScreen extends Component {
                     avatar: 'https://placeimg.com/150/150/any',
                 },
                 image: 'https://placeimg.com/200/200/any',
-                styles:{
-                    bubble:{
-                        backgroundColor:'transparent'
-                    }
+                styles: {
+                    bubble: {
+                        backgroundColor: 'transparent',
+                    },
                 },
                 // Mark the message as sent, using one tick
                 sent: true,
@@ -201,27 +203,36 @@ class ChatScreen extends Component {
     };
 
     render() {
-        const {messages}=this.state
+        const {messages} = this.state;
         return (
-            <TapaalChat
-                innerRef={this.giftedChatRef}
-                backgroundColor={'#080b10'}
-                senderBubbleBgColor={"green"}
-                receiverBubbleBgColor={"white"}
-                iconColor={"white"}
-                sendIconConatinerColor={"#00b19b"}
-                textColor={"white"}
-                inputBackgroundColor={"#2d383e"}
-                messages={messages}
-                onSend={message => this.onSend(message)}
-                onSendAudio={message => this.onSendAudio(message)}
-                onSendImage={message => this.onSend(message)}
-                user={{
-                    _id: 1,
-                    name: 'Amal',
-                    avatar: 'https://placeimg.com/160/160/any',
-                }}
-            />
+            <>
+                <StatusBar
+                    backgroundColor={Colors.statusBarColor}
+                    barStyle="light-content"
+                />
+                <Header isGroup  textColor={Colors.primaryText}/>
+                <TapaalChat
+                    containerStyle={{flex:11}}
+                    innerRef={this.giftedChatRef}
+                    backgroundColor={Colors.background}
+                    senderBubbleBgColor={Colors.senderBubbleBackground}
+                    receiverBubbleBgColor={Colors.receiverBubbleBackground}
+                    sendIconColor={Colors.sendIcon}
+                    iconColor={Colors.icon}
+                    sendIconContainerColor={Colors.sendIconContainer}
+                    textColor={Colors.primaryText}
+                    inputBackgroundColor={Colors.inputBackground}
+                    messages={messages}
+                    onSend={message => this.onSend(message)}
+                    onSendAudio={message => this.onSendAudio(message)}
+                    onSendImage={message => this.onSend(message)}
+                    user={{
+                        _id: 1,
+                        name: 'Amal',
+                        avatar: 'https://placeimg.com/160/160/any',
+                    }}
+                />
+            </>
         );
     }
 }
