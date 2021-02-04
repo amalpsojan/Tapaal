@@ -1,4 +1,4 @@
-import React, {Component, useCallback, useEffect, useState} from 'react';
+import React, {Component} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {TapaalChat} from '@components/';
 
@@ -19,6 +19,40 @@ class ChatScreen extends Component {
     fetchMessages = () => {
         console.log('fetchMessages');
         const messages = [
+            {
+                _id: 9,
+                text: 'https://google.com',
+                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 25, 21)),
+                user: {
+                    _id: 3,
+                    name: 'React Native Developer',
+                    avatar: 'https://placeimg.com/150/150/any',
+                },
+                // Mark the message as sent, using one tick
+                sent: true,
+                // Mark the message as received, using two tick
+                received: true,
+                // Mark the message as pending with a clock loader
+                pending: true,
+                // Any additional custom parameters are passed through
+            },{
+                _id: 8,
+                text: 'internal storageimage message gvtryd5rd54ws43w',
+                createdAt: new Date(Date.UTC(2021, 0, 28, 21, 25, 21)),
+                user: {
+                    _id: 3,
+                    name: 'React Native Developer',
+                    avatar: 'https://placeimg.com/150/150/any',
+                },
+                image: 'file:///storage/emulated/0/Tapaal/Media/Tapaal Images/images.jpg',
+                // Mark the message as sent, using one tick
+                sent: true,
+                // Mark the message as received, using two tick
+                received: true,
+                // Mark the message as pending with a clock loader
+                pending: true,
+                // Any additional custom parameters are passed through
+            },
             {
                 _id: 7,
                 createdAt: new Date(Date.UTC(2021, 0, 28, 21, 25, 21)),
@@ -61,7 +95,7 @@ class ChatScreen extends Component {
             },
             {
                 _id: 5,
-                text: 'o',
+                text: 'ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
                 createdAt: new Date(Date.UTC(2021, 0, 27, 21, 30, 21)),
                 user: {
                     _id: 3,
@@ -167,13 +201,18 @@ class ChatScreen extends Component {
     };
 
     render() {
+        const {messages}=this.state
         return (
             <TapaalChat
                 innerRef={this.giftedChatRef}
                 backgroundColor={'#080b10'}
                 senderBubbleBgColor={"green"}
                 receiverBubbleBgColor={"white"}
-                messages={this.state.messages}
+                iconColor={"white"}
+                sendIconConatinerColor={"#00b19b"}
+                textColor={"white"}
+                inputBackgroundColor={"#2d383e"}
+                messages={messages}
                 onSend={message => this.onSend(message)}
                 onSendAudio={message => this.onSendAudio(message)}
                 onSendImage={message => this.onSend(message)}

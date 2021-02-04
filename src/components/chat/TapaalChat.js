@@ -7,14 +7,9 @@ import {View, PermissionsAndroid, Text, TouchableOpacity, StyleSheet} from 'reac
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import {Image} from '../image/Image';
-
-const primaryTextColor = 'white';
-
-const backgroundColor = '#080b10';
-
-const BOTTOM_CONATINER_WIDTH = '100%';
-
-const inputBackgroundColor = '#2d383e';
+import MessageText from '../chat/MessageText';
+import {isValidURL} from '@utils/helper';
+import MessageURL from '@components/chat/MessageURL';
 
 const INPUT_CONATINER_WIDTH = '85%';
 
@@ -24,39 +19,40 @@ const INPUT_WIDTH = '80%';
 const styles = {
     container: {
         flex: 1,
-        backgroundColor: backgroundColor,
     },
     bubble: {
         right: {
-            backgroundColor: 'red',
+            maxWidth:200
         },
         left: {
-            backgroundColor: 'blue',
+            maxWidth:200
         },
     },
     imageContainer: {
-        borderRadius: 15,
-        padding: 2,
+        // borderRadius: 15,
+        // paddingTop:2,
+        // paddingBottom:2,
+        // padding: 2,
     },
     image: {
         width: 200,
         height: 200,
-        padding: 6,
-        borderRadius: 15,
+        // paddingTop: 6,
+        // paddingBottom: 6,
+        // padding: 6,
+        // borderRadius: 15,
     },
     textInputConatiner: {
         width: INPUT_CONATINER_WIDTH,
         flexDirection: 'row',
         borderRadius: 25,
-        backgroundColor: inputBackgroundColor,
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: 5,
     },
     textInput: {
-        color: primaryTextColor,
         height: INPUT_HEIGHT,
-        width: INPUT_WIDTH,
+        // width: INPUT_WIDTH,
         fontSize: 15,
     },
     bottom: {
@@ -101,7 +97,6 @@ const styles = {
             alignItems: 'center',
             justifyContent: 'center',
             // marginHorizontal: 5,
-            backgroundColor: '#00b19b',
             borderRadius: 50,
         },
         send: {
@@ -109,7 +104,6 @@ const styles = {
             height: 40,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#00b19b',
             borderRadius: 50,
         },
     },
@@ -131,8 +125,6 @@ const styles = {
         },
     },
     inputToolBarContainer: {
-        borderTopColor: backgroundColor,
-        backgroundColor: backgroundColor,
         alignItems: 'center',
     },
     inputToolBarPrimary: {
@@ -143,19 +135,19 @@ const styles = {
 
 const CustomImageButton = (props) => (
     <View style={styles.iconContainer.camera}>
-        <IonIcon style={styles.icon.camera} name={'camera'} size={26} color="blue"/>
+        <IonIcon style={styles.icon.camera} name={'camera'} size={26} color={props.iconColor}/>
     </View>
 );
 
 const CustomAttachButton = (props) => (
     <View style={styles.iconContainer.attach}>
-        <IonIcon style={styles.icon.attach} name={'attach'} size={26} color="blue"/>
+        <IonIcon style={styles.icon.attach} name={'attach'} size={26} color={props.iconColor}/>
     </View>
 );
 
 const Emoji = (props) => (
     <View style={styles.iconContainer.emoji}>
-        <IonIcon style={styles.icon.emoji} name={'happy'} size={23} color="#fff"/>
+        <IonIcon style={styles.icon.emoji} name={'happy'} size={23} color={props.iconColor}/>
     </View>
 );
 
@@ -165,12 +157,20 @@ const renderMessageImage = (Props) => {
             style={[styles.imageContainer]}
         >
             <Image
-                resizeMode={'contain'}
+                resizeMode={'cover'}
                 style={[styles.image]}
                 source={Props.currentMessage.image}
             />
         </View>
     );
+};
+
+const renderMessageText = (Props) => {
+    if(isValidURL(Props.currentMessage.text)){
+        return <MessageURL text={Props.currentMessage.text}/>
+    }
+    return <MessageText {...Props}/>
+
 };
 
 const renderBubble = (props) => {
@@ -215,10 +215,10 @@ const RenderSend = (props) => {
             <Send
                 {...props}
                 disabled={false}
-                containerStyle={styles.iconContainer.send}
+                containerStyle={[styles.iconContainer.send,{backgroundColor:props.sendIconConatinerColor}]}
             >
                 <IonIcon style={styles.icon.send} name={'send'} size={20}
-                         color="#fff"/>
+                         color={props.iconColor}/>
             </Send>
         );
     }
@@ -230,11 +230,11 @@ const RenderSend = (props) => {
             testID='audioSend'
             accessibilityLabel='audioSend'
             accessible
-            style={styles.iconContainer.record}
+            style={[styles.iconContainer.record,{backgroundColor:props.sendIconConatinerColor}]}
         >
             <View>
                 <IonIcon style={styles.icon.record} name={'ios-mic'} size={26}
-                         color="#fff"/>
+                         color={props.iconColor}/>
             </View>
         </TouchableOpacity>
     );
@@ -245,7 +245,7 @@ const renderInputToolbar = (props) => {
     return (
         <InputToolbar
             {...props}
-            containerStyle={[styles.inputToolBarContainer, backgroundColor && {
+            containerStyle={[styles.inputToolBarContainer,{
                 backgroundColor,
                 borderTopColor: backgroundColor,
             }]}
@@ -282,11 +282,11 @@ export const TapaalChat = ({innerRef, backgroundColor, user, onSendImage, ...pro
     const renderComposer = props => {
         return (
             <View style={[styles.bottom]}>
-                <View style={styles.textInputConatiner}>
+                <View style={[styles.textInputConatiner,{backgroundColor: props.inputBackgroundColor}]}>
                     <Emoji {...props}/>
                     <Composer
                         {...props}
-                        textInputStyle={styles.textInput}
+                        textInputStyle={[styles.textInput, {color: props.textColor}]}
                         textInputProps={{onImageChange}}
                     />
                 </View>
@@ -296,7 +296,7 @@ export const TapaalChat = ({innerRef, backgroundColor, user, onSendImage, ...pro
     };
 
     return (
-        <View style={[styles.container, backgroundColor && {backgroundColor}]}>
+        <View style={[styles.container,{backgroundColor}]}>
             <RNGiftedChat
                 ref={innerRef}
                 alwaysShowSend
@@ -314,6 +314,14 @@ export const TapaalChat = ({innerRef, backgroundColor, user, onSendImage, ...pro
 
 TapaalChat.propTypes = {};
 
-TapaalChat.defaultProps = {};
+TapaalChat.defaultProps = {
+    backgroundColor:'#080b10',
+    senderBubbleBgColor:'green',
+    receiverBubbleBgColor:'white',
+    iconColor:'white',
+    sendIconConatinerColor:'#00b19b',
+    textColor:'white',
+    inputBackgroundColor:'#2d383e'
+};
 
 
