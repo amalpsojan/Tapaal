@@ -2,7 +2,7 @@ import React from 'react';
 import type ReactElement from 'react';
 import RNImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
-import {ViewPropTypes,StyleSheet} from 'react-native';
+import {ViewPropTypes, StyleSheet} from 'react-native';
 
 import {getFastImgSource} from '@utils/helper';
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export const Image = ({style,source,resizeMode, ...props}: Object): ReactElement<RNImage> => (
+export const Image = ({style, source, resizeMode, ...props}: Object): ReactElement<RNImage> => (
     <RNImage
         style={[style]}
         resizeMode={RNImage.resizeMode[resizeMode]}

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, SafeAreaView, Text, View} from 'react-native';
 import NavigationService, {isMountedRef} from '@navigations/index';
 import Routes from '@navigations/routes';
+import {TapaalImage} from '@components/image/TapaalImage';
 
 class HomeScreen extends Component {
 
@@ -29,6 +30,7 @@ class HomeScreen extends Component {
             <Text>Signed in!</Text>
             <Button title="Chat" onPress={this.chat} />
             <Button title="Sign out" onPress={this.logoutUser} />
+            <TapaalImage/>
           </View>
         </SafeAreaView>
     );
