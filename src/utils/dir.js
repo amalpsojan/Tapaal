@@ -11,7 +11,7 @@ const IMG_PATH = MEDIA_PATH + '/' + `${appName} Images`;
 const VIDEO_PATH = MEDIA_PATH + '/' + `${appName} Video`;
 const DOC_PATH = MEDIA_PATH + '/' + `${appName} Documents`;
 
-export const DirPath = {
+export const DirPaths = {
     app: DIR_PATH,
     media: MEDIA_PATH,
     image: IMG_PATH,
