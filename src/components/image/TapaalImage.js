@@ -1,18 +1,9 @@
 import React, {useEffect} from 'react';
-import RNFetchBlob from 'rn-fetch-blob';
-import {createAppDir, DirPaths} from '@utils/dir';
-import {createImgThumb} from '@utils/img';
-
-const DIR_PATH = RNFetchBlob.fs.dirs.SDCardDir;
-const DIR_NAME = 'Tapaal';
-const IMG_PATH = '/Media/Tapaal Images';
-// const SAVE_PATH = DIR_PATH + DIR_NAME + IMG_PATH + 'images.jpg';
-const SAVE_PATH = DIR_PATH + DIR_NAME + IMG_PATH;
+import {createImgDir} from '@utils/dir';
 
 export const TapaalImage = ({...props}: Object) => {
     useEffect(() => {
-        createAppDir();
-        createImgThumb(DirPaths.image + '/images.jpg');
+        createImgDir();
     }, []);
 
     return null;

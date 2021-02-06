@@ -10,4 +10,5 @@ export const createVideoThumb = (path) =>{
 
 const createThumb = (path) =>{
 
+    //Create Thumb and return base64 then save to database :-)
 }

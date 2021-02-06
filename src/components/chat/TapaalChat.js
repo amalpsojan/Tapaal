@@ -1,17 +1,21 @@
 import React from 'react';
-import {Composer, InputToolbar, Bubble, Send, Actions, GiftedChat as RNGiftedChat} from 'react-native-gifted-chat';
+import {Composer, InputToolbar, Bubble, Send, GiftedChat as RNGiftedChat} from 'react-native-gifted-chat';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import type ReactElement from 'react';
-import {View, PermissionsAndroid, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
-import {Image} from '../image/Image';
 import MessageText from '../chat/MessageText';
 import {isValidURL} from '@utils/helper';
 import MessageURL from '@components/chat/MessageURL';
+import {MessageImage} from '@components/chat/MessageImage';
+import {Text} from '@components/text/text';
+import {FONT_SIZE_12} from '@styles/typography';
 
 const INPUT_CONATINER_WIDTH = '85%';
+
+const appName = 'Tapaal';
 
 const INPUT_HEIGHT = 44;
 const INPUT_WIDTH = '80%';
@@ -22,17 +26,11 @@ const styles = {
     },
     bubble: {
         right: {
-            maxWidth:200
+            maxWidth: 200,
         },
         left: {
-            maxWidth:200
+            maxWidth: 200,
         },
-    },
-    imageContainer: {
-        // borderRadius: 15,
-        // paddingTop:2,
-        // paddingBottom:2,
-        // padding: 2,
     },
     image: {
         width: 200,
@@ -108,6 +106,9 @@ const styles = {
         },
     },
     icon: {
+        lock: {
+            textAlign: 'center',
+        },
         emoji: {
             textAlign: 'center',
         },
@@ -129,6 +130,22 @@ const styles = {
     },
     inputToolBarPrimary: {
         alignItems: 'center',
+    },
+    secureChatContainer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        transform: [{scaleY: -1}],
+        marginHorizontal: 25,
+        padding: 8,
+        borderRadius: 5,
+    },
+    secureChatText: {
+        fontSize: FONT_SIZE_12,
+        textAlign: 'center',
     },
 };
 
@@ -153,23 +170,15 @@ const Emoji = (props) => (
 
 const renderMessageImage = (Props) => {
     return (
-        <View
-            style={[styles.imageContainer]}
-        >
-            <Image
-                resizeMode={'cover'}
-                style={[styles.image]}
-                source={Props.currentMessage.image}
-            />
-        </View>
+        <MessageImage {...Props}/>
     );
 };
 
 const renderMessageText = (Props) => {
-    if(isValidURL(Props.currentMessage.text)){
-        return <MessageURL text={Props.currentMessage.text}/>
+    if (isValidURL(Props.currentMessage.text)) {
+        return <MessageURL text={Props.currentMessage.text}/>;
     }
-    return <MessageText {...Props}/>
+    return <MessageText {...Props}/>;
 
 };
 
@@ -215,7 +224,7 @@ const RenderSend = (props) => {
             <Send
                 {...props}
                 disabled={false}
-                containerStyle={[styles.iconContainer.send,{backgroundColor:props.sendIconContainerColor}]}
+                containerStyle={[styles.iconContainer.send, {backgroundColor: props.sendIconContainerColor}]}
             >
                 <IonIcon style={styles.icon.send} name={'send'} size={20}
                          color={props.sendIconColor}/>
@@ -230,7 +239,7 @@ const RenderSend = (props) => {
             testID='audioSend'
             accessibilityLabel='audioSend'
             accessible
-            style={[styles.iconContainer.record,{backgroundColor:props.sendIconContainerColor}]}
+            style={[styles.iconContainer.record, {backgroundColor: props.sendIconContainerColor}]}
         >
             <View>
                 <IonIcon style={styles.icon.record} name={'ios-mic'} size={26}
@@ -245,7 +254,7 @@ const renderInputToolbar = (props) => {
     return (
         <InputToolbar
             {...props}
-            containerStyle={[styles.inputToolBarContainer,{
+            containerStyle={[styles.inputToolBarContainer, {
                 backgroundColor,
                 borderTopColor: backgroundColor,
             }]}
@@ -254,7 +263,8 @@ const renderInputToolbar = (props) => {
     );
 };
 
-export const TapaalChat = ({containerStyle,innerRef, backgroundColor, user, onSendImage, ...props}: Object): ReactElement<RNGiftedChat> => {
+
+export const TapaalChat = ({containerStyle, innerRef, backgroundColor, user, onSendImage, ...props}: Object): ReactElement<RNGiftedChat> => {
 
     type OnImageChangeCallback = (event: { nativeEvent: { uri: string, linkUri: string } }) => void;
 
@@ -279,10 +289,25 @@ export const TapaalChat = ({containerStyle,innerRef, backgroundColor, user, onSe
         // send a new message with message.image = <publicDownloadUrl>
     };
 
+    const renderChatEmpty = props => {
+        return (
+            <TouchableOpacity style={[styles.secureChatContainer, {
+                backgroundColor: props.inputBackgroundColor,
+            }]}>
+                <Text style={[styles.secureChatText,{color: props.secureChatColor}]}><IonIcon
+                    style={styles.icon.lock}
+                    name={'lock-closed'} size={FONT_SIZE_12}
+                    color={props.secureChatColor}/> Messages
+                    and calls are end-to-end encrypted. No one outside of this chat, not even {appName},can read or
+                    listen to them. Tap to learn more.</Text>
+            </TouchableOpacity>
+        );
+    };
+
     const renderComposer = props => {
         return (
             <View style={[styles.bottom]}>
-                <View style={[styles.textInputConatiner,{backgroundColor: props.inputBackgroundColor}]}>
+                <View style={[styles.textInputConatiner, {backgroundColor: props.inputBackgroundColor}]}>
                     <Emoji {...props}/>
                     <Composer
                         {...props}
@@ -296,8 +321,9 @@ export const TapaalChat = ({containerStyle,innerRef, backgroundColor, user, onSe
     };
 
     return (
-        <View style={[styles.container,{backgroundColor},containerStyle]}>
+        <View style={[styles.container, {backgroundColor}, containerStyle]}>
             <RNGiftedChat
+                renderChatEmpty={() => renderChatEmpty(props)}
                 ref={innerRef}
                 alwaysShowSend
                 renderComposer={renderComposer}
@@ -315,14 +341,15 @@ export const TapaalChat = ({containerStyle,innerRef, backgroundColor, user, onSe
 TapaalChat.propTypes = {};
 
 TapaalChat.defaultProps = {
-    backgroundColor:'#080b10',
-    senderBubbleBgColor:'green',
-    receiverBubbleBgColor:'white',
-    sendIconColor:'white',
-    iconColor:'white',
-    sendIconContainerColor:'#00b19b',
-    textColor:'white',
-    inputBackgroundColor:'#2d383e'
+    backgroundColor: '#080b10',
+    senderBubbleBgColor: 'green',
+    receiverBubbleBgColor: 'white',
+    sendIconColor: 'white',
+    iconColor: 'white',
+    sendIconContainerColor: '#00b19b',
+    textColor: 'white',
+    inputBackgroundColor: '#2d383e',
+    secureChatColor: '#e8bf6a',
 };
 
 

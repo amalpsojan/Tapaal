@@ -1,8 +1,23 @@
 import React, {Component} from 'react';
 import {StatusBar} from 'react-native';
 import {GiftedChat} from 'react-native-gifted-chat';
-import {TapaalChat,Header} from '@components/';
+import {TapaalChat, Header} from '@components/';
 import Colors from '@styles/colors';
+
+
+const user = {
+    _id: 1,
+    name: 'Amal',
+    avatar: 'https://placeimg.com/160/160/any',
+};
+
+const receivers = {
+    3: {
+        _id: 3,
+        name: 'React Native Developer',
+        avatar: 'https://placeimg.com/150/150/any'
+    }
+};
 
 class ChatScreen extends Component {
 
@@ -181,7 +196,7 @@ class ChatScreen extends Component {
                 // Any additional custom parameters are passed through
             },
         ];
-        this.setState({messages});
+        // this.setState({messages});
     };
 
 
@@ -210,9 +225,9 @@ class ChatScreen extends Component {
                     backgroundColor={Colors.statusBarColor}
                     barStyle="light-content"
                 />
-                <Header isGroup  textColor={Colors.primaryText}/>
+                <Header sender={user} receivers={receivers} backArrowColor={"#e9e5e5"} textColor={Colors.primaryText}/>
                 <TapaalChat
-                    containerStyle={{flex:11}}
+                    containerStyle={{flex: 11}}
                     innerRef={this.giftedChatRef}
                     backgroundColor={Colors.background}
                     senderBubbleBgColor={Colors.senderBubbleBackground}
@@ -226,11 +241,7 @@ class ChatScreen extends Component {
                     onSend={message => this.onSend(message)}
                     onSendAudio={message => this.onSendAudio(message)}
                     onSendImage={message => this.onSend(message)}
-                    user={{
-                        _id: 1,
-                        name: 'Amal',
-                        avatar: 'https://placeimg.com/160/160/any',
-                    }}
+                    user={user}
                 />
             </>
         );
