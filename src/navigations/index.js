@@ -28,6 +28,16 @@ function navigate(routeName, params) {
 
 }
 
+function goBack(){
+  if (isMountedRef.current && navigationRef.current) {
+    // Perform navigation if the app has mounted
+    navigationRef.current.goBack();
+  } else {
+    // You can decide what to do if the app hasn't mounted
+    // You can ignore this, or add these actions to a queue you can call later
+  }
+}
+
 /**
  * Call this function when you want to navigate to a specific route AND reset the navigation history.
  *
@@ -64,12 +74,15 @@ function closeDrawer() {
   // navigator.dispatch(DrawerActions.closeDrawer());
 }
 
+
+
 const NavigationService = {
   navigate,
   toggleDrawer,
   openDrawer,
   closeDrawer,
   navigateAndReset,
+  goBack
 };
 
 export default NavigationService;

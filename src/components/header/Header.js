@@ -1,9 +1,13 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, TouchableOpacity, Platform} from 'react-native';
 import Colors from '@styles/colors';
 import {Image} from '@components/image/Image';
 import {Text} from '@components/text/text';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import NavigationService from '@navigations/index';
+import {isIos} from '@constants/index';
+
+const arrowIcon= isIos ? 'ios-arrow-back': 'md-arrow-back'
 
 const styles = {
     container: {
@@ -19,20 +23,13 @@ const styles = {
     },
     icon: {
         back: {
-            paddingHorizontal:5,
+            paddingHorizontal: 5,
             textAlign: 'center',
         },
     },
 };
 
-const users = {
-    _id: 3,
-    name: 'React Native Developer',
-    avatar: 'https://placeimg.com/150/150/any',
-};
-
 export const Header = ({backArrowColor, sender, receivers, groupChat, profileImage, textColor}: Object) => {
-    // md-arrow-back
     let avatar, name;
     if (!groupChat) {
         const receiver = receivers[Object.keys(receivers)[0]];
@@ -40,9 +37,15 @@ export const Header = ({backArrowColor, sender, receivers, groupChat, profileIma
         avatar = receiver.avatar;
     }
 
+    const goBack = () => {
+        NavigationService.goBack();
+    };
+
     return (
         <View style={[styles.container]}>
-            <IonIcon style={styles.icon.back} name={'md-arrow-back'} size={28} color={backArrowColor}/>
+            <TouchableOpacity onPress={goBack}>
+                <IonIcon style={styles.icon.back} name={arrowIcon} size={28} color={backArrowColor}/>
+            </TouchableOpacity>
             <Image
                 resizeMode={'cover'}
                 style={[styles.image]}
