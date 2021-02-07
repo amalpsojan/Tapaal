@@ -3,8 +3,10 @@ import {Button, SafeAreaView, Text, View} from 'react-native';
 import NavigationService, {isMountedRef} from '@navigations/index';
 import Routes from '@navigations/routes';
 import {TapaalImage} from '@components/image/TapaalImage';
+import {FONT_SIZE_12} from '@styles/typography';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
-class ChatsScreen extends Component {
+class CameraScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -19,12 +21,11 @@ class ChatsScreen extends Component {
         return (
             <SafeAreaView>
                 <View>
-                    <Button title="Chat" onPress={this.chat} />
-                    {/*<TapaalImage/>*/}
+
                 </View>
             </SafeAreaView>
         );
     }
 }
 
-export {ChatsScreen};
+export {CameraScreen};
