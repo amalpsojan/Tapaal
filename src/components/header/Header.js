@@ -51,7 +51,7 @@ export const Header = ({backArrowColor, sender, receivers, groupChat, profileIma
                 style={[styles.image]}
                 source={avatar}
             />
-            <Text style={[{color: textColor}]}>{name}</Text>
+            <Text style={[{color: textColor,paddingHorizontal: 10}]}>{name}</Text>
         </View>
     );
 };
