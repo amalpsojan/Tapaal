@@ -42,6 +42,7 @@ export const themes = {
         secondary: '#767676',
 
         primaryText: '#ffffff',
+        secondaryText: '#f3f1f1',
 
         background: '#080b10',
         inputBackground: '#2d383e',

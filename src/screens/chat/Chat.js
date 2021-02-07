@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {TapaalChat, Header} from '@components/';
 import Colors from '@styles/colors';
+import {APP_NAME} from '@config/index';
 
 
 const user = {
@@ -15,8 +16,8 @@ const receivers = {
     3: {
         _id: 3,
         name: 'React Native Developer',
-        avatar: 'https://placeimg.com/150/150/any'
-    }
+        avatar: 'https://placeimg.com/150/150/any',
+    },
 };
 
 class ChatScreen extends Component {
@@ -225,8 +226,16 @@ class ChatScreen extends Component {
                     backgroundColor={Colors.statusBarColor}
                     barStyle="light-content"
                 />
-                <Header sender={user} receivers={receivers} backArrowColor={"#e9e5e5"} textColor={Colors.primaryText}/>
+                <Header
+                    containerStyle={{flex: 1}}
+                    showBackArrow
+                    backArrowColor={'#e9e5e5'}
+                    textColor={Colors.primaryText}
+                    headerType={'chat'}
+                    headerProps={{sender: user, receivers, groupChat: false}}
+                />
                 <TapaalChat
+                    appName={APP_NAME}
                     containerStyle={{flex: 11}}
                     innerRef={this.giftedChatRef}
                     backgroundColor={Colors.background}

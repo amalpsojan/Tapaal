@@ -1,18 +1,39 @@
 import React, {Component} from 'react';
-import {View,Dimensions} from 'react-native';
+import {Button, SafeAreaView, Text, View} from 'react-native';
+import NavigationService, {isMountedRef} from '@navigations/index';
+import Routes from '@navigations/routes';
+import {TapaalImage} from '@components/image/TapaalImage';
 
-const screen = Dimensions.get("window");
-
-const width = screen.width;
-const height = screen.height;
 class ChatsScreen extends Component {
 
+    constructor(props) {
+        super(props);
+        isMountedRef.current = true;
+    }
 
+    componentDidMount() {
+
+    }
+
+    logoutUser = () => {
+
+    };
+
+    chat = () => {
+        NavigationService.navigate(Routes.CHAT_SCREEN);
+    };
 
     render() {
-        return <View style={{backgroundColor:'yellow',width,height}}>
-
-        </View>
+        return (
+            <SafeAreaView>
+                <View>
+                    <Text>Signed in!</Text>
+                    <Button title="Chat" onPress={this.chat} />
+                    <Button title="Sign out" onPress={this.logoutUser} />
+                    <TapaalImage/>
+                </View>
+            </SafeAreaView>
+        );
     }
 }
 

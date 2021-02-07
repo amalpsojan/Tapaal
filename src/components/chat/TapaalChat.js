@@ -15,8 +15,6 @@ import {FONT_SIZE_12} from '@styles/typography';
 
 const INPUT_CONATINER_WIDTH = '85%';
 
-const appName = 'Tapaal';
-
 const INPUT_HEIGHT = 44;
 const INPUT_WIDTH = '80%';
 
@@ -264,7 +262,7 @@ const renderInputToolbar = (props) => {
 };
 
 
-export const TapaalChat = ({containerStyle, innerRef, backgroundColor, user, onSendImage, ...props}: Object): ReactElement<RNGiftedChat> => {
+export const TapaalChat = ({appName,containerStyle, innerRef, backgroundColor, user, onSendImage, ...props}: Object): ReactElement<RNGiftedChat> => {
 
     type OnImageChangeCallback = (event: { nativeEvent: { uri: string, linkUri: string } }) => void;
 
@@ -298,7 +296,7 @@ export const TapaalChat = ({containerStyle, innerRef, backgroundColor, user, onS
                     style={styles.icon.lock}
                     name={'lock-closed'} size={FONT_SIZE_12}
                     color={props.secureChatColor}/> Messages
-                    and calls are end-to-end encrypted. No one outside of this chat, not even {appName},can read or
+                    and calls are end-to-end encrypted. No one outside of this chat, not even {props.appName},can read or
                     listen to them. Tap to learn more.</Text>
             </TouchableOpacity>
         );
@@ -350,6 +348,7 @@ TapaalChat.defaultProps = {
     textColor: 'white',
     inputBackgroundColor: '#2d383e',
     secureChatColor: '#e8bf6a',
+    appName:"{App Name}"
 };
 
 

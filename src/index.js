@@ -1,21 +1,28 @@
 import React from 'react';
+import {View} from 'react-native';
 // import Root from './app';
-import {Chat, Home, Chats, Calls} from '@screens/';
+import {Chat, Status, Chats, Calls} from '@screens/';
 import {navigationRef} from '@navigations/index';
 import Routes from '@navigations/routes';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import Colors from '@styles/colors';
+import {FONT_SIZE_12, FONT_SIZE_20} from '@styles/typography';
+import {Text} from '@components/text/text';
+import {Header} from '@components/header/Header';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
+
+const appName = 'Tapaal';
 
 const App = () => {
     return (
         <>
             <NavigationContainer ref={navigationRef}>
                 <Stack.Navigator headerMode="none">
-                    <Stack.Screen name={Routes.TAB_STACK} component={MyTabs}/>
+                    <Stack.Screen name={Routes.HOME_STACK} component={HomeStack}/>
                     <Stack.Screen name={Routes.CHAT_SCREEN} component={Chat}/>
                 </Stack.Navigator>
             </NavigationContainer>
@@ -25,13 +32,24 @@ const App = () => {
     );
 };
 
-function MyTabs() {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name={Routes.HOME_SCREEN} component={Home} options={{ title: 'Home' }}/>
-            <Tab.Screen name={Routes.CHATS_SCREEN} component={Chats} options={{ title: 'Status' }} />
-            <Tab.Screen name={Routes.CALLS_SCREEN} component={Calls} options={{ title: 'Calls' }} />
-        </Tab.Navigator>
+function HomeStack() {
+    return (<>
+            <Header
+                title={appName}
+                textStyle={{color: Colors.secondaryText,fontSize: FONT_SIZE_20}}
+                containerStyle={{backgroundColor: Colors.primary,padding:5,paddingHorizontal:15}}/>
+            <Tab.Navigator tabBarOptions={{
+                labelStyle: {fontSize: FONT_SIZE_12},
+                style: {backgroundColor: Colors.primary},
+                inactiveTintColor: Colors.primaryText,
+                activeTintColor: '#18ffea',
+                indicatorStyle:{backgroundColor: '#00b19b'}
+            }}>
+                <Tab.Screen name={Routes.CHATS_SCREEN} component={Chats} options={{title: 'Chats'}}/>
+                <Tab.Screen name={Routes.STATUS_SCREEN} component={Status} options={{title: 'Status'}}/>
+                <Tab.Screen name={Routes.CALLS_SCREEN} component={Calls} options={{title: 'Calls'}}/>
+            </Tab.Navigator>
+        </>
     );
 }
 
