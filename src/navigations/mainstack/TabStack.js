@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, TouchableWithoutFeedback} from 'react-native';
 import {Header} from '@components/header/Header';
 import Colors from '@styles/colors';
 import {FONT_SIZE_12, FONT_SIZE_20} from '@styles/typography';
@@ -9,9 +8,10 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import useTranslation from '@i18n/';
+import {APP_NAME} from '@config/';
 
 const Tab = createMaterialTopTabNavigator();
-const appName = 'Tapaal';
+const appName = APP_NAME;
 
 const TabStack = () => {
     const {t} = useTranslation();
