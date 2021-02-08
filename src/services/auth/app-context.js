@@ -1,5 +1,4 @@
 import * as React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useCallback, useContext} from 'react';
 
 import {APP_STATE} from '@constants/';

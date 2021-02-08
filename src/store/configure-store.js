@@ -11,10 +11,9 @@ let devTools = composeWithDevTools({
   trace: true,
 });
 
-export default (model, api) => {
+export default (model) => {
   return createStore(model, {
     name: 'tapaalStore',
-    injections: api ? {api} : null,
     // compose: devTools,
     // devTools: true,
   });
