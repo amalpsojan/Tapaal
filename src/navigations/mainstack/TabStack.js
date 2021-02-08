@@ -1,4 +1,5 @@
 import React from 'react';
+import {View, TouchableWithoutFeedback} from 'react-native';
 import {Header} from '@components/header/Header';
 import Colors from '@styles/colors';
 import {FONT_SIZE_12, FONT_SIZE_20} from '@styles/typography';
@@ -15,6 +16,23 @@ const appName = 'Tapaal';
 const TabStack = () => {
     const {t} = useTranslation();
 
+    const tabsConfig = () => {
+        return {
+            initialRouteName: Routes.CHATS_SCREEN,
+            tabBarOptions: {
+                labelStyle: {fontSize: FONT_SIZE_12},
+                style: {backgroundColor: Colors.primary},
+                inactiveTintColor: Colors.primaryText,
+                activeTintColor: '#18ffea',
+                indicatorStyle: {backgroundColor: '#00b19b'},
+                showIcon: true,
+                tabStyle: {
+                    width: 90,
+                },
+            },
+        };
+    };
+
     return (
         <>
             <Header
@@ -22,15 +40,7 @@ const TabStack = () => {
                 textStyle={{color: Colors.secondaryText, fontSize: FONT_SIZE_20}}
                 containerStyle={{backgroundColor: Colors.primary, padding: 5, paddingHorizontal: 15}}/>
             <Tab.Navigator
-                initialRouteName={Routes.CHATS_SCREEN}
-                tabBarOptions={{
-                    labelStyle: {fontSize: FONT_SIZE_12},
-                    style: {backgroundColor: Colors.primary},
-                    inactiveTintColor: Colors.primaryText,
-                    activeTintColor: '#18ffea',
-                    indicatorStyle: {backgroundColor: '#00b19b'},
-                    showIcon: true,
-                }}>
+                {...tabsConfig()}>
                 <Tab.Screen name={Routes.CAMERA_SCREEN} component={Camera} options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({color, focused, size}: Props) => {
